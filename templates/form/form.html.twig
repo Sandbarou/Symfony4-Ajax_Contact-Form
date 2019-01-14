@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Formulaire {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="py-5 text-center">
+            <h2>Vos coordonnées</h2>
+            <p class="lead">Merci de remplir tous les champs ci-dessous</p>
+        </div>
+
+        <div>
+            {#On affiche tous les messages flash dont le nom est « notice »#}
+            {% for message in app.flashes('notice') %}
+                <p class="alert alert-info">{{ message }}</p>
+            {% endfor %}
+        </div>
+
+        <p id="email_unique"></p>
+
+        <div class="col-md-12 order-md-1">
+
+            {{ form_start(form) }}
+
+            {{ form_errors(form) }}
+
+            <div class="mb-3">
+                {{ form_label(form.email, "Email") }}
+                {{ form_errors(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'email@exemple.fr'}}) }}
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.prenom, "Prénom") }}
+                    {{ form_errors(form.prenom) }}
+                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.nom, "Nom") }}
+                    {{ form_errors(form.nom) }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.adresse, "Adresse") }}
+                {{ form_errors(form.adresse) }}
+                {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.cp_client, "Code postal") }}
+                    {{ form_errors(form.cp_client) }}
+                    {{ form_widget(form.cp_client, {'attr': {'class': 'form-control cp', 'aria-describedby': 'cpHelpBlock'}}) }}
+                    <small id="cpHelpBlock" class="form-text text-muted">
+                        Veuillez saisir les 5 chiffres de votre code postal
+                    </small>
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.ville_client, "Ville") }}
+                    {{ form_errors(form.ville_client) }}
+                    {{ form_widget(form.ville_client, {'attr': {'class': 'form-control ville', 'aria-describedby': 'villeHelpBlock'}}) }}
+                    <small id="villeHelpBlock" class="form-text text-muted">
+                        Veuillez sélectionner une ville
+                    </small>
+                </div>
+            </div>
+
+            <hr class="mb-4">
+            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Valider mes coordonnées" />
+
+            {{ form_end(form) }}
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/ajax_villes.js') }}"></script>
+    <script src="{{ asset('js/ajax_email.js') }}"></script>
+{% endblock %}

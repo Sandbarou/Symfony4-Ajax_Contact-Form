@@ -1,0 +1,12 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+#index:
+#    path: /
+#    controller: App\Controller\ClientController::address
+
+#app_test:
+#    path: /test
+#    controller: App\Controller\ClientController::test
+
